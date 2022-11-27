@@ -60,7 +60,6 @@ class HBNBCommand(cmd.Cmd):
             if id_flag == 0:
                 print("** no instance found **")
 
-
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id, and save the changes"""
 
@@ -87,12 +86,22 @@ class HBNBCommand(cmd.Cmd):
             if id_flag == 0:
                 print("** no instance found **")
 
-
-
-
     def do_all(self, arg):
         """Prints all string representation of all instances based or not on the class name"""
-        pass
+        
+        _list = []
+        dic = storage.all()
+        if arg == "":
+            for key, obj in dic.items():
+                _list.append(str(obj))
+            print(_list)
+        elif arg in HBNBCommand.__cls_list:
+            for key, obj in dic.items():
+                if arg == key.split('.')[0]:
+                    _list.append(str(obj))
+            print(_list)
+        else:
+            print("** class doesn't exist **")
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id by adding or updating attribute, and save the change"""
