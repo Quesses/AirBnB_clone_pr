@@ -30,9 +30,9 @@ class HBNBCommand(cmd.Cmd):
         """
         if arg == "":
             print("** class name missing **")
-        elif arg != "BaseModel":
+        elif arg not in HBNBCommand.__cls_list:
             print("** class doesn't exist **")
-        if arg in HBNBCommand.__cls_list:
+        else:
             ins = eval(arg)()
             storage.save()
             print(ins.id)
@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
 
         if arg == "":
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif args[0] not in HBNBCommand.__cls_list:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
@@ -68,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
 
         if arg == "":
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif args[0] not in HBNBCommand.__cls_list:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
@@ -104,8 +104,40 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and id by adding or updating attribute, and save the change"""
-        pass
+        """Updates an instance based on the class name and id by adding or updating attribute, and save the change\n
+        USAGE: update <class name> <id> <attribute name> <attribute value>"""
+
+        id_flag = 0
+        args = arg.split()
+
+        if arg == "":
+            print("** class name missing **")
+        elif args[0] not in HBNBCommand.__cls_list:
+            print("** class doesn't exist **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        elif len(args) < 3:
+            print("** attribute name missing **")
+        elif len(args) < 4:
+            print("** value missing **")
+        else:
+            _key = args[0] + "." + args[1]
+            dic = storage.all()
+            for key, obj in dic.items():
+                if key == _key:
+                    val_idx = 3 + len(args[0]) + len(args[1]) + len(args[2])
+                    if arg[val_idx] == "\"":
+                        val_idx += 1
+                    value = arg[val_idx:]
+                    if hasattr(obj, args[2]):
+                        value = type(getattr(obj, args[2]))(arg[val_idx:])
+                        setattr(obj, args[2], value)
+                        storage.save()
+                        storage.reload()
+                        id_flag = 1
+
+            if id_flag == 0:
+                print("** no instance found **")
 
 
 
