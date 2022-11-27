@@ -4,17 +4,22 @@
 import os.path
 import json
 from models.base_model import BaseModel
+from models.user import User
+
 
 class FileStorage:
     """Class FileStorage for serialization and deserialization if JSON file
         Attr:
             __file_path: string - path to the JSON file
-            __objects: dictionary - empty but will store all objects by <class name>.id
+            __objects: dictionary - empty but will store all\
+                    objects by <class name>.id
         methods:
             all(self): returns the dictionary __objects
-            new(self, obj): sets in __objects the obj with key <obj class name>.id
-            save(self): serializes __objects to the JSON file (path: __file_path)
-            reload(self): deserializes the JSON file to __objects (only if the JSON file (__file_path) exists, otherwise does nothing
+            new(self, obj): sets in __objects the obj with\
+                    key <obj class name>.id
+            save(self): serializes __objects to the JSON file (__file_path)
+            reload(self): deserializes the JSON file to __objects\
+                    (only if the JSON file exists), otherwise does nothing
     """
 
     __file_path = "file.json"
@@ -49,4 +54,3 @@ class FileStorage:
                 for key, dic in json.loads(js_f.read()).items():
                     dic = eval(dic['__class__'])(**dic)
                     FileStorage.__objects[key] = dic
-

@@ -2,16 +2,18 @@
 """ Personal practice of the airbnb clonbe project """
 
 import cmd
+import models
 from models import storage
 from models.base_model import BaseModel
-import models
+from models.user import User
+
 
 class HBNBCommand(cmd.Cmd):
     """Command line interface/console fo airbnb users"""
 
-    prompt  = "(hbnb)"
-    __cls_list = ["BaseModel"]
-    
+    prompt = "(hbnb)"
+    __cls_list = ["BaseModel", "User"]
+
     def do_quit(self, arg):
         """Quit command to exit the program"""
         return True
@@ -38,7 +40,8 @@ class HBNBCommand(cmd.Cmd):
             print(ins.id)
 
     def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id"""
+        """Prints the string representation of an instance based\
+                on the class name and id"""
 
         id_flag = 0
         args = arg.split()
@@ -61,7 +64,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_destroy(self, arg):
-        """Deletes an instance based on the class name and id, and save the changes"""
+        """Deletes an instance based on the class name and id\
+                and save the changes"""
 
         id_flag = 0
         args = arg.split()
@@ -87,8 +91,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, arg):
-        """Prints all string representation of all instances based or not on the class name"""
-        
+        """Prints all string representation of all instances of a class\
+                if specified, otherwise prints for all class instances"""
+
         _list = []
         dic = storage.all()
         if arg == "":
@@ -104,7 +109,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and id by adding or updating attribute, and save the change\n
+        """Updates an instance based on the class name and id by adding\
+                or updating attribute, and save the change\n
         USAGE: update <class name> <id> <attribute name> <attribute value>"""
 
         id_flag = 0
@@ -138,7 +144,6 @@ class HBNBCommand(cmd.Cmd):
 
             if id_flag == 0:
                 print("** no instance found **")
-
 
 
 if __name__ == "__main__":
