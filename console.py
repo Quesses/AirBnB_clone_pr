@@ -17,7 +17,8 @@ class HBNBCommand(cmd.Cmd):
     """Command line interface/console fo airbnb users"""
 
     prompt = "(hbnb)"
-    __cls_list = ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]
+    __cls_list = ["BaseModel", "User", "Place", "State", "City",
+                  "Amenity", "Review"]
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
