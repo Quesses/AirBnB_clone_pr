@@ -3,7 +3,7 @@
 
 import uuid
 from datetime import datetime
-from models import storage
+import models
 
 
 class BaseModel:
@@ -38,7 +38,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """Return the string documentation of an instance"""
@@ -49,7 +49,7 @@ class BaseModel:
         """saves the current time into the attr updated_at"""
 
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values\
@@ -57,8 +57,14 @@ class BaseModel:
 
         dic = dict(self.__dict__)
         dic['__class__'] = type(self).__name__
-        dic['updated_at'] = str(self.updated_at.isoformat())
         dic['id'] = self.id
-        dic['created_at'] = str(self.created_at.isoformat())
+        if type(self.updated_at) is str:
+            dic['updated_at'] = self.updated_at
+        else:
+            dic['updated_at'] = self.updated_at.isoformat()
+        if type(self.created_at) is str:
+            dic['created_at'] = dic['created_at']
+        else:
+            dic['created_at'] = dic['created_at'].isoformat()
 
         return dic
