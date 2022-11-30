@@ -22,7 +22,7 @@ class TestDocsFileStorage(unittest.TestCase):
         for func in dir(FileStorage):
             self.assertTrue(len(func.__doc__) > 0)
 
-     def test_permissions(self):
+    def test_permissions(self):
         """test read-write-execute permissions"""
         read = os.access('models/engine/file_storage.py', os.R_OK)
         self.assertTrue(read)
@@ -35,6 +35,7 @@ class TestDocsFileStorage(unittest.TestCase):
         """check if obj is an instance of BaseModel"""
         obj = FileStorage()
         self.assertIsInstance(obj, FileStorage)
-        
+
+
 if __name__ == "__main__":
     unittest.main()
