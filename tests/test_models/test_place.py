@@ -22,5 +22,6 @@ class TestDocsplace(unittest.TestCase):
         for func in dir(Place):
             self.assertTrue(len(func.__doc__) > 0)
 
+
 if __name__ == "__main__":
     unittest.main()
