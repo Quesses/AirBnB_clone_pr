@@ -27,10 +27,10 @@ class Test_Base_Model_outputs(unittest.TestCase):
         update_at attribute is updated accordingly
         """
         inst1 = BaseModel()
-        update_at_attr_before_save = inst1.update_at
+        update_attr_before_save = inst1.update_at
         inst1.save()
-        update_at_attr_after_save = inst1.update_at
-        self.assertNotEqual(update_at_attr_before_save, update_at_attr_after_save)
+        update_attr_after_save = inst1.update_at
+        self.assertNotEqual(update_attr_before_save, update_attr_after_save)
 
     def test_file_exec(self):
         """Test if file has reaad, write and execute permision"""
@@ -62,6 +62,7 @@ class Test_Base_Model_outputs(unittest.TestCase):
         self.assertEqual(updated_expected_format, updated_actual_format)
         self.assertEqual(created_expected_format, created_actual_format)
         self.assertEqual(class_attr_value_expected, class_attr_value_get)
+
 
 if __name__ == "__main__":
     unittest.main()
