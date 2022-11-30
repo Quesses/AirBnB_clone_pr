@@ -62,3 +62,6 @@ class Test_Base_Model_outputs(unittest.TestCase):
         self.assertEqual(updated_expected_format, updated_actual_format)
         self.assertEqual(created_expected_format, created_actual_format)
         self.assertEqual(class_attr_value_expected, class_attr_value_get)
+
+if __name__ == "__main__":
+    unittest.main()
