@@ -151,7 +151,7 @@ class HBNBCommand(cmd.Cmd):
             if id_flag == 0:
                 print("** no instance found **")
 
-def default(self, args):
+    def default(self, args):
         """default method that perfom actions when no command it's given"""
         count = 0
         if len(args.split(".")) > 1:
@@ -167,7 +167,8 @@ def default(self, args):
                         print(count)
                     if args.split(".")[1].split("(")[0] == "show":
                         id_ = args.split("\"")[1].split("\"")[0]
-                        self.do_show(class_name + " " + id_)                    if args.split(".")[1].split("(")[0] == "destroy":
+                        self.do_show(class_name + " " + id_)
+                    if args.split(".")[1].split("(")[0] == "destroy":
                         id_ = args.split("\"")[1].split("\"")[0]
                         self.do_destroy(class_name + " " + id_)
                     if args.split(".")[1].split("(")[0] == "update":
