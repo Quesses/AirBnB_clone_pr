@@ -1,0 +1,9 @@
+/*  footer stylesheet */
+footer {
+	bottom: 0px;
+	position: fixed;
+	background-color: green;
+	line-height: 60px;
+	text-align: center;
+	width: 100%;
+}

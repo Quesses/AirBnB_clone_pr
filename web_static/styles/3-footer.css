@@ -1,0 +1,11 @@
+/*  footer stylesheet */
+footer {
+	bottom: 0px;
+	position: fixed;
+	background-color: white;
+	line-height: 60px;
+	text-align: center;
+	width: 100%;
+	border-top: 1px solid #CCCCCC;
+	z-index: 1;
+}
